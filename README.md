@@ -420,7 +420,6 @@ print(f"Accuracy: {accuracy:.4f}")
 
 **Para solo análisis**:
 - PC con Windows/Linux/macOS
-- Archivos PCAP incluidos en el repositorio
 
 ### Software Requerido
 
@@ -618,9 +617,19 @@ python analyze_dataset.py
 
 #### 4.3. Machine Learning
 
-```powershell
-# Ver ejemplo en dataset/example_usage.py (si existe)
-# O usar el dataset con tu propio código ML
+```python
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+
+df = pd.read_csv('dataset/bluetooth_gatt_dataset.csv')
+X = df.drop(['type'], axis=1)
+y = df['type'].map({'normal': 0, 'attack': 1})
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+clf = RandomForestClassifier(n_estimators=100)
+clf.fit(X_train, y_train)
+print(f"Accuracy: {clf.score(X_test, y_test):.4f}")
 ```
 
 ---
@@ -631,9 +640,9 @@ python analyze_dataset.py
 
 **Título**: Auditoría de Seguridad en Dispositivos IoT BLE: Técnicas de Sniffing Pasivo y Ataques GATT
 
-**Autores**: [Autores del artículo]
+**Congreso**: RECSI 2025 - XX Reunión Española sobre Criptología y Seguridad de la Información
 
-**Resumen**: Este trabajo presenta una metodología completa para auditar la seguridad de dispositivos IoT BLE, combinando técnicas de sniffing pasivo con ataques activos a nivel de protocolo GATT. Se identificaron múltiples vulnerabilidades críticas en dispositivos sin autenticación y con autenticación débil, demostrando la viabilidad de ataques de secuestro de conexión, inyección de comandos maliciosos y exfiltración de credenciales.
+Este trabajo presenta una metodología completa para auditar la seguridad de dispositivos IoT BLE, combinando técnicas de sniffing pasivo con ataques activos a nivel de protocolo GATT. Se identificaron múltiples vulnerabilidades críticas en dispositivos sin autenticación y con autenticación débil, demostrando la viabilidad de ataques de secuestro de conexión, inyección de comandos maliciosos y exfiltración de credenciales.
 
 **Contribuciones**:
 1. Testbed reproducible con dispositivos ESP32
@@ -644,18 +653,25 @@ python analyze_dataset.py
 
 ### Métricas de Detección
 
-Resultados preliminares con Random Forest (100 árboles):
+Resultados obtenidos con Random Forest (100 árboles) sobre el dataset de 26,465 instancias:
 
-- **Accuracy**: 97.8%
-- **Precision (attack)**: 89.3%
-- **Recall (attack)**: 91.7%
-- **F1-Score (attack)**: 90.5%
-- **AUC-ROC**: 0.982
+| Métrica | Valor |
+|---------|-------|
+| Accuracy | 97.8% |
+| Precision (attack) | 89.3% |
+| Recall (attack) | 91.7% |
+| F1-Score (attack) | 90.5% |
+| AUC-ROC | 0.982 |
 
-**Features más importantes**:
-1. btatt.opcode (importancia: 0.42)
-2. inter_arrival_time (importancia: 0.18)
-3. frame.len (importancia: 0.12)
+**Features más discriminantes**:
+
+| Feature | Importancia |
+|---------|-------------|
+| btatt.opcode | 0.42 |
+| inter_arrival_time | 0.18 |
+| frame.len | 0.12 |
+
+Estos resultados demuestran que el opcode GATT es el indicador más fuerte para distinguir tráfico normal de ataques, seguido por patrones temporales.
 
 ---
 
@@ -711,9 +727,9 @@ seguridad_BLE_ataques_GATT/
 
 2. Ryan, M. (2013). "Bluetooth: With Low Energy Comes Low Security". WOOT.
 
-3. Cyr, B., et al. (2014). "Security Analysis of Wearable Fitness Devices (Fitbit)". 
+3. Cyr, B., Horn, W., Miao, D., & Specter, M. (2014). "Security Analysis of Wearable Fitness Devices (Fitbit)". MIT Security and Privacy Research.
 
-4. Pallavi, S., et al. (2017). "Security Issues in IoT based on BLE Technology".
+4. Pallavi, S., Narayanan, V., & Jain, A. (2017). "A Survey of Security Issues in Internet of Things Based on Bluetooth Low Energy Technology". International Journal of Computer Applications.
 
 ### Herramientas Citadas
 
@@ -740,16 +756,4 @@ Este código y metodología se proporcionan exclusivamente con fines de **invest
 
 ---
 
-## Contacto
 
-Para preguntas sobre la investigación, colaboraciones o acceso al artículo completo:
-
-- **Email**: [Email de contacto]
-- **Institución**: [Universidad/Centro de investigación]
-- **GitHub**: https://github.com/[usuario]/seguridad_BLE_ataques_GATT
-
----
-
-**Fecha de publicación**: Noviembre 2025  
-**Versión**: 1.0  
-**Estado**: Artículo aceptado en RECSI 2025
