@@ -1,6 +1,6 @@
 # Auditoría de Seguridad en Dispositivos IoT BLE: Técnicas de Sniffing Pasivo y Ataques GATT
 
-**Artículo presentado en RECSI 2025**
+**Artículo presentado en RECSI 2026**
 
 Este repositorio contiene el código completo, datasets y metodología utilizada para la investigación sobre vulnerabilidades de seguridad en dispositivos IoT Bluetooth Low Energy (BLE), con énfasis en ataques a nivel de protocolo GATT y técnicas de sniffing pasivo.
 
@@ -636,11 +636,11 @@ print(f"Accuracy: {clf.score(X_test, y_test):.4f}")
 
 ## Resultados y Publicaciones
 
-### Artículo RECSI 2025
+### Artículo RECSI 2026
 
 **Título**: Auditoría de Seguridad en Dispositivos IoT BLE: Técnicas de Sniffing Pasivo y Ataques GATT
 
-**Congreso**: RECSI 2025 - XX Reunión Española sobre Criptología y Seguridad de la Información
+**Congreso**: RECSI 2026 - XX Reunión Española sobre Criptología y Seguridad de la Información
 
 Este trabajo presenta una metodología completa para auditar la seguridad de dispositivos IoT BLE, combinando técnicas de sniffing pasivo con ataques activos a nivel de protocolo GATT. Se identificaron múltiples vulnerabilidades críticas en dispositivos sin autenticación y con autenticación débil, demostrando la viabilidad de ataques de secuestro de conexión, inyección de comandos maliciosos y exfiltración de credenciales.
 
